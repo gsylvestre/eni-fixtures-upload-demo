@@ -6,6 +6,7 @@ use App\Repository\BookRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=BookRepository::class)
@@ -33,6 +34,28 @@ class Book
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $cover;
+
+    /**
+     * @Assert\Image(maxSize="8M")
+     */
+    private $coverFile;
+
+    /**
+     * @return mixed
+     */
+    public function getCoverFile()
+    {
+        return $this->coverFile;
+    }
+
+    /**
+     * @param mixed $coverFile
+     */
+    public function setCoverFile($coverFile): void
+    {
+        $this->coverFile = $coverFile;
+    }
+
 
     /**
      * @ORM\Column(type="datetime")
